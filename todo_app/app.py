@@ -1,3 +1,5 @@
+from flask import Flask
+
 from todo_app.flask_config import Config
 
 app = Flask(__name__)
