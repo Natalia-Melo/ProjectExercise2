@@ -24,15 +24,6 @@ def get_item(id):
         item: The saved item, or None if no items match the specified ID.
     """
     items = get_items()
-
-    """
-    i = 0
-    for item in items:
-        if item['title'] == None or item['title'] == 'car' or item['title'] =='hello':
-            del items[i]
-            i -= 1
-        i += 1
-    """
     return next((item for item in items if item['id'] == int(id)), None)
 
 
@@ -47,10 +38,9 @@ def add_item(title):
     items = get_items()
 
     # Determine the ID for the item based on that of the previously added item
-    #id = items[-1]['id'] + 1 if items else 0
+    id = items[-1]['id'] + 1 if items else 0
 
-
-    item = { 'id': len(items), 'title': title, 'status': 'Not Started' }
+    item = { 'id': id, 'title': title, 'status': 'Not Started' }
 
     # Add the item to the list
     items.append(item)
