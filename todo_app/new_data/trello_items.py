@@ -8,8 +8,8 @@ def fetch_all_cards(Board_ID):
     Board_ID = '62cc1c1efb40f28f8a02eabb'
     url = 'https://api.trello.com/1/boards/'+Board_ID + '/cards/open'
 
-    query_parameters = {'key' : '96232fa3a30653ad5263af0c8c1df055',
-                                'token' : '24fd9ec4f8fa09ab74fcc9c23da319308c1bf094ec9e69a4da7202768c0d6441'}
+    query_parameters = {'key': '96232fa3a30653ad5263af0c8c1df055',
+                                'token': '24fd9ec4f8fa09ab74fcc9c23da319308c1bf094ec9e69a4da7202768c0d6441'}
 
     r = requests.get(url, params=query_parameters)
 
@@ -31,5 +31,6 @@ def create_new_card(title):
 
     r = requests.post(url, params=query)
 
-    return pass
+    return url
+
 

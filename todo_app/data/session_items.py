@@ -1,4 +1,6 @@
 from flask import session
+import requests
+import os
 
 _DEFAULT_ITEMS = [
     { 'id': 1, 'status': 'Not Started', 'title': 'List saved todo items' },
