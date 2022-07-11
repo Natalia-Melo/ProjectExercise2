@@ -2,7 +2,7 @@ import requests
 import os
 
 LIST_ID = [{'to-do-list_id': '62cc1c52bb382e686252622d'},
-           {'board' = '62cc1c1efb40f28f8a02eabb'}]
+           {'board' : '62cc1c1efb40f28f8a02eabb'}]
 
 def fetch_all_cards(Board_ID):
     Board_ID = '62cc1c1efb40f28f8a02eabb'
@@ -26,10 +26,10 @@ def create_new_card(title):
     to_do_list_id = '62cc1c52bb382e686252622d'
     url = 'https://api.trello.com/1/boards/'+Board_ID + '/cards'
 
-    query = {'idList':'62cc1c52bb382e686252622d', 'key' : os.environ.get('key'), 'token' : os.environ.get('token'),
-             'name' = title}
+    query = {'idList':'62cc1c52bb382e686252622d', 'key':os.environ.get('key'), 'token':os.environ.get('token'),
+             'name' : title}
 
     r = requests.post(url, params=query)
 
-
+    return pass
 
