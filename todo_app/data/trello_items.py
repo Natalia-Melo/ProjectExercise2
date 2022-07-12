@@ -25,7 +25,7 @@ def create_new_card(title):
     headers = {
         "Accept": "application/json"
     }
-    r = requests.request("POST", url, params=query, headers=headers)
+    requests.request("POST", url, params=query, headers=headers)
 
 def mark_as_complete(card_id):
     url = build_url('cards/'+card_id)
@@ -34,7 +34,7 @@ def mark_as_complete(card_id):
     headers = {
         "Accept": "application/json"
     }
-    r = requests.put(url, params=query, headers=headers)
+    requests.put(url, params=query, headers=headers)
 
 def json_of_all_cards():
     url = build_url('boards/'+Board_ID + '/cards/open')
