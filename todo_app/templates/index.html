@@ -9,12 +9,29 @@
   <div class="row">
     <div class="col-md-12">
       <h2>Items</h2>
-      <ul class="list-group mb-4">
-        {% for item in items %}
+        <h3>To-Do Items</h3>
+        <ul class="list-group mb-4">
+        {% for item in items if item.idList=='62cc1c1efb40f28f8a02eac2' %}
         <li> {{item.name}} </li>
         <a href="{{url_for('complete_item',id = item.id) }}">Mark item as completed</a>
         {% endfor %}
-      </ul>
+        </ul>
+
+        <h3>Doing Items</h3>
+        <ul class="list-group mb-4">
+        {% for item in items if item.idList== '62cc1c1efb40f28f8a02eac3' %}
+        <li> {{item.name}} </li>
+        <a href="{{url_for('complete_item',id = item.id) }}">Mark item as completed</a>
+        {% endfor %}
+        </ul>
+
+        <h3>Done Items</h3>
+        <ul class="list-group mb-4">
+        {% for item in items if item.idList== '62cc1c1efb40f28f8a02eac4' %}
+        <li> {{item.name}} </li>
+        <a href="{{url_for('complete_item',id = item.id) }}">Mark item as completed</a>
+        {% endfor %}
+        </ul>
     </div>
   </div>
 

@@ -28,10 +28,10 @@ def complete_item(id):
 
 
 class Item:
-    def __init__(self, id, name, status = 'To Do'):
+    def __init__(self, id, name,idList):
         self.id = id
         self.name = name
-        self.status = status
+        self.idList = idList
 
     @classmethod
     def from_trello_card(cls, card, list):
