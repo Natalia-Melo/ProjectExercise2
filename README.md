@@ -55,6 +55,6 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 
 
 ## Accesing Trello Board
-Ensure that the key and token parameters are uploaded to a .env file to ensure connection with the trello board
+Ensure that the board id, key and token parameters are uploaded to a .env file to ensure connection with the trello board
 
 
