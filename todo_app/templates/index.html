@@ -14,7 +14,9 @@
             <ul class="list-group mb-4">
             {% for item in items if item.idList==list['idList'] %}
             <li> {{item.name}}
-            <a class ="button" href="{{url_for('complete_item',id = item.id) }}">Mark item as completed</a>
+            {% if list['name'] != 'Done'%}
+                <a class ="button" href="{{url_for('complete_item',id = item.id) }}">Mark item as completed</a>
+            {%  endif %}
             </li>
                 <body>
                 <p> <b> Description of task </b> </p>
@@ -35,5 +37,6 @@
     <button type="submit"> Add </button>
   </div>
 </form>
+
 
 {% endblock %}
