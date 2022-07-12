@@ -23,7 +23,7 @@ def create_new_card(title):
 
     data_todo_list = (define_lists_in_board())[0]
 
-    query = build_params({'name':title,'idList':data_todo_list['idList'}])
+    query = build_params({'name':title,'idList':data_todo_list['idList'})
 
     headers = {
         "Accept": "application/json"
