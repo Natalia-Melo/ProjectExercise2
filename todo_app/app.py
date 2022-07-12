@@ -11,7 +11,7 @@ app.config.from_object(Config())
 def index():
     items = fetch_all_cards()
 
-    all_items = [Item(item['id'],item['name'],item['idList']) for item in items]
+    all_items = [Item(item['id'],item['name'],item['idList'],item['desc']) for item in items]
 
     return render_template('index.html', items = all_items)
 
@@ -28,10 +28,11 @@ def complete_item(id):
 
 
 class Item:
-    def __init__(self, id, name,idList):
+    def __init__(self, id, name,idList,desc):
         self.id = id
         self.name = name
         self.idList = idList
+        self.desc = desc
 
     @classmethod
     def from_trello_card(cls, card, list):
