@@ -1,22 +1,15 @@
 import requests
 import os
 
-# Lists information
-LISTS_INFO = [{'id': 1, 'name': 'To Do', 'trello_id':'62cc1c1efb40f28f8a02eac2'},
-              {'id': 2, 'name': 'Doing', 'trello_id':'62cc1c1efb40f28f8a02eac3'},
-              {'id': 3, 'name': 'Done', 'trello_id': '62cc1c1efb40f28f8a02eac4'}
-              ]
-
+url_main = 'https://api.trello.com/1/cards/'
 
 def fetch_all_cards():
     r_json = json_of_all_cards()
     return r_json
 
 def create_new_card(title):
-    # Board_ID = '62cc1c1efb40f28f8a02eabb'
-    url = 'https://api.trello.com/1/cards'
-
-    query = {'idList':'62cc1c1efb40f28f8a02eac3', 'key': os.environ.get('key'),
+    url = url_main
+    query = {'idList':'62cc1c1efb40f28f8a02eac2', 'key': os.environ.get('key'),
              'token': os.environ.get('token'),'name':title}
     headers = {
         "Accept": "application/json"
@@ -28,7 +21,7 @@ def mark_as_complete(card_id):
     query = {'idList':'62cc1c1efb40f28f8a02eac4', 'key': os.environ.get('key'),
              'token': os.environ.get('token')}
 
-    url = 'https://api.trello.com/1/cards/'+card_id
+    url = url_main+card_id
 
     headers = {
         "Accept": "application/json"

@@ -13,7 +13,7 @@
         <ul class="list-group mb-4">
         {% for item in items if item.idList=='62cc1c1efb40f28f8a02eac2' %}
         <li> {{item.name}}
-        <a href="{{url_for('complete_item',id = item.id) }}">Mark item as completed</a>
+        <a class ="button" href="{{url_for('complete_item',id = item.id) }}">Mark item as completed</a>
         {% endfor %}
         </li>
         </ul>
