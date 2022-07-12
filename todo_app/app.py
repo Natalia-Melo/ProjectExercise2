@@ -9,18 +9,14 @@ app.config.from_object(Config())
 @app.route('/')
 def index():
     items = fetch_all_cards()
-
     lists = define_lists_in_board()
-
     all_items = [Item(item['id'],item['name'],item['idList'],item['desc']) for item in items]
-
     return render_template('index.html', items = all_items, lists = lists)
 
 @app.route('/add_new_item', methods = ['POST'])
 def add_new_item():
     create_new_card(request.form.get('title'))
     return redirect(url_for('index'))
-
 
 @app.route('/complete_item/<id>')
 def complete_item(id):

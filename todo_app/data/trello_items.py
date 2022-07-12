@@ -20,11 +20,8 @@ def fetch_all_cards():
 
 def create_new_card(title):
     url = build_url('cards')
-
     data_todo_list = (define_lists_in_board())[0]
-
     query = build_params({'name':title,'idList':data_todo_list['idList']})
-
     headers = {
         "Accept": "application/json"
     }
@@ -33,9 +30,7 @@ def create_new_card(title):
 def mark_as_complete(card_id):
     url = build_url('cards/'+card_id)
     data_done_list = (define_lists_in_board())[-1]
-
     query = build_params({'idList':data_done_list['idList']})
-
     headers = {
         "Accept": "application/json"
     }
@@ -43,19 +38,14 @@ def mark_as_complete(card_id):
 
 def json_of_all_cards():
     url = build_url('boards/'+Board_ID + '/cards/open')
-
     query = get_auth_params()
-
     r = requests.get(url, params=query)
-
     r_json = r.json()
     return r_json
 
 def define_lists_in_board():
     url = build_url('boards/'+Board_ID + '/lists/open')
-
     query = get_auth_params()
-
     r = requests.get(url, params=query)
     r_json = r.json()
     lists_in_boards = []
