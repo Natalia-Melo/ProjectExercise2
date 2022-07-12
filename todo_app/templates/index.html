@@ -11,8 +11,8 @@
       <h2>Items</h2>
       <ul class="list-group mb-4">
         {% for item in items %}
-        <li> {{item['name']}} </li>
-        <a href="{{url_for('complete_item',id = item['id']) }}">Mark item as completed</a>
+        <li> {{item.name}} </li>
+        <a href="{{url_for('complete_item',id = item.id) }}">Mark item as completed</a>
         {% endfor %}
       </ul>
     </div>

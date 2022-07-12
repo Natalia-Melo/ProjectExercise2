@@ -10,7 +10,10 @@ app.config.from_object(Config())
 @app.route('/')
 def index():
     items = fetch_all_cards()
-    return render_template('index.html', items = items)
+
+    all_items = [Item(item['id'],item['name'],item['idList']) for item in items]
+
+    return render_template('index.html', items = all_items)
 
 @app.route('/add_new_item', methods = ['POST'])
 def add_new_item():
@@ -20,6 +23,17 @@ def add_new_item():
 
 @app.route('/complete_item/<id>')
 def complete_item(id):
-    print(id)
     mark_as_complete(id)
     return redirect(url_for('index'))
+
+
+class Item:
+    def __init__(self, id, name, status = 'To Do'):
+        self.id = id
+        self.name = name
+        self.status = status
+
+    @classmethod
+    def from_trello_card(cls, card, list):
+        return cls(card['id'], card['name'], list['name'])
+
