@@ -1,35 +1,40 @@
 import requests
 import os
 
-url_main_cards = 'https://api.trello.com/1/cards/'
 Board_ID = os.environ.get('BOARD_ID')
-base_query_parameters = {'key': os.environ.get('key'),
-                                'token': os.environ.get('token')}
+
+def build_url(endpoint):
+    return 'https://api.trello.com/1/'+endpoint
+
+def get_auth_params():
+    return({'key':os.environ.get('KEY'), 'token':os.environ.get('TOKEN')})
+
+def build_params(params = {}):
+    full_params = get_auth_params()
+    full_params.update(params)
+    return full_params
 
 def fetch_all_cards():
     r_json = json_of_all_cards()
     return r_json
 
 def create_new_card(title):
-    url = url_main_cards
+    url = build_url('cards')
+
     data_todo_list = (define_lists_in_board())[0]
 
-    query = base_query_parameters
-    query.update({'name':title})
-    query.update({'idList':data_todo_list['idList']})
+    query = build_params({'name':title,'idList':data_todo_list['idList'}])
 
     headers = {
         "Accept": "application/json"
     }
-
     r = requests.request("POST", url, params=query, headers=headers)
 
 def mark_as_complete(card_id):
+    url = build_url('cards/'+card_id)
     data_done_list = (define_lists_in_board())[-1]
-    query = base_query_parameters
-    query.update({'idList':data_done_list['idList']})
 
-    url = url_main_cards+card_id
+    query = build_params({'idList':data_done_list['idList']})
 
     headers = {
         "Accept": "application/json"
@@ -39,7 +44,7 @@ def mark_as_complete(card_id):
 def json_of_all_cards():
     url = 'https://api.trello.com/1/boards/'+Board_ID + '/cards/open'
 
-    query = base_query_parameters
+    query = get_auth_params()
 
     r = requests.get(url, params=query)
 
@@ -49,7 +54,7 @@ def json_of_all_cards():
 def define_lists_in_board():
     url = 'https://api.trello.com/1/boards/'+Board_ID + '/lists/open'
 
-    query = base_query_parameters
+    query = get_auth_params()
 
     r = requests.get(url, params=query)
     r_json = r.json()
