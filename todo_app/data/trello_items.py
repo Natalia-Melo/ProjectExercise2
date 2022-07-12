@@ -58,9 +58,10 @@ def define_lists_in_board():
         lists_in_boards.append({'idList':item['id'], 'name':item['name']})
     return lists_in_boards
 
+"""
 def add_due_date(date):
     url = url_main_cards
     query = base_query_parameters
     query.update({'due':date})
     r = requests.put(url, params=query)
-
+"""
