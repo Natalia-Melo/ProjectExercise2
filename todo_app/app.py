@@ -27,13 +27,6 @@ def complete_item(id):
     mark_as_complete(id)
     return redirect(url_for('index'))
 
-"""
-@app.route('/add_due_date/<id>')
-def add_due_date(id):
-    add_due_date(id)
-    return redirect(url_for('index'))
-"""
-
 class Item:
     def __init__(self, id, name,idList,desc):
         self.id = id

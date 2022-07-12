@@ -16,7 +16,7 @@
             <li> {{item.name}}
             {% if list.name != 'Done' %}
                 <a class ="button" href="{{url_for('complete_item',id = item.id) }}">Mark item as completed</a>
-            {%  endif %}
+            {% endif %}
             </li>
                 <body>
                 <p> <b> Description of task </b> </p>

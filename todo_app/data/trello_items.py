@@ -23,7 +23,7 @@ def create_new_card(title):
 
     data_todo_list = (define_lists_in_board())[0]
 
-    query = build_params({'name':title,'idList':data_todo_list['idList'})
+    query = build_params({'name':title,'idList':data_todo_list['idList']})
 
     headers = {
         "Accept": "application/json"
@@ -42,7 +42,7 @@ def mark_as_complete(card_id):
     r = requests.put(url, params=query, headers=headers)
 
 def json_of_all_cards():
-    url = 'https://api.trello.com/1/boards/'+Board_ID + '/cards/open'
+    url = build_url('boards/'+Board_ID + '/cards/open')
 
     query = get_auth_params()
 
@@ -52,7 +52,7 @@ def json_of_all_cards():
     return r_json
 
 def define_lists_in_board():
-    url = 'https://api.trello.com/1/boards/'+Board_ID + '/lists/open'
+    url = build_url('boards/'+Board_ID + '/lists/open')
 
     query = get_auth_params()
 
