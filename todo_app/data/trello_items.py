@@ -39,9 +39,9 @@ def mark_as_complete(card_id):
 def json_of_all_cards():
     url = 'https://api.trello.com/1/boards/'+Board_ID + '/cards/open'
 
-    query_parameters = base_query_parameters
+    query = base_query_parameters
 
-    r = requests.get(url, params=query_parameters)
+    r = requests.get(url, params=query)
 
     r_json = r.json()
     return r_json
@@ -49,19 +49,11 @@ def json_of_all_cards():
 def define_lists_in_board():
     url = 'https://api.trello.com/1/boards/'+Board_ID + '/lists/open'
 
-    query_parameters = base_query_parameters
+    query = base_query_parameters
 
-    r = requests.get(url, params=query_parameters)
+    r = requests.get(url, params=query)
     r_json = r.json()
     lists_in_boards = []
     for item in r_json:
         lists_in_boards.append({'idList':item['id'], 'name':item['name']})
     return lists_in_boards
-
-"""
-def add_due_date(date):
-    url = url_main_cards
-    query = base_query_parameters
-    query.update({'due':date})
-    r = requests.put(url, params=query)
-"""
