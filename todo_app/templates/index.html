@@ -10,12 +10,12 @@
     <div class="col-md-12">
       <h2>Items</h2>
         {% for list in lists %}
-        <h3>{{ list.name}}</h3>
+        <h3>{{list.name}}</h3>
             <ul class="list-group mb-4">
             {% for item in items if item.idList == list.idList %}
             <li> {{item.name}}
             {% if list.name != 'Done' %}
-                <a class ="button" href="{{url_for('complete_item',id = item.id) }}">Mark item as completed</a>
+                <a class ="button" href="{{url_for('complete_item',id = item.id)}}">Mark item as completed</a>
             {% endif %}
             </li>
                 <body>
