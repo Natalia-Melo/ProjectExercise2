@@ -21,7 +21,7 @@ def create_new_card(title):
     headers = {
         "Accept": "application/json"
     }
-    requests.request("POST", url, params=query, headers=headers)
+    requests.post(url, params=query, headers=headers)
 
 def mark_as_complete(card_id):
     url = build_url(f"cards/{card_id}")
