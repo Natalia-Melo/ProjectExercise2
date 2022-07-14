@@ -21,8 +21,3 @@ class Item:
     @property
     def done_items(self):
         return [item['name'] for item in self._items if item['status']=='Done']
-
-
-
-
-

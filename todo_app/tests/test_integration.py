@@ -15,12 +15,47 @@ def client():
     with test_app.test_client() as client:
          yield client
 
-
 def test_index_page(monkeypatch, client):
-# This replaces any call to requests.get with our own function
     monkeypatch.setattr(requests, 'get', stub)
     response = client.get('/')
 
+def stub(url, params={}):
+    print(url)
+    test_board_id = os.environ.get('BOARD_ID')
+    if url == f'https://api.trello.com/1/boards/{test_board_id}/lists/open':
+        fake_response_data = [{
+            'id': '123def',
+            'name': 'Test Card',
+            'idList': '6564f',
+            'desc': 'Test Description'
+        }]
+
+    elif url == f"https://api.trello.com/1/boards/{test_board_id}/cards/open":
+        fake_response_data = [{
+            'id': '123def',
+            'name': 'Test Card',
+            'idList': '6564f',
+            'desc': 'Test Description'
+        }]
+
+    elif url == f"https://api.trello.com/1/cards":
+        fake_response_data = [{
+            'id': '123def',
+            'name': 'Test Card',
+            'idList': '6564f',
+            'desc': 'Test Description'
+        }]
+
+    else:
+        fake_response_data = [{
+            'id': '123def',
+            'name': 'Test Card',
+            'idList': '6564f',
+            'desc': 'Test Description'
+        }]
+
+    return StubResponse(fake_response_data)
+    raise Exception(f'Integration test did not expect URL "{url}"')
 
 class StubResponse():
     def __init__(self, fake_response_data):
@@ -28,15 +63,3 @@ class StubResponse():
 
     def json(self):
         return self.fake_response_data
-
-
-def stub(url, params={}):
-    test_board_id = os.environ.get('TRELLO_BOARD_ID')
-    if url == f'https://api.trello.com/1/boards/{test_board_id}/lists':
-        fake_response_data = [{
-            'id': '123abc',
-            'name': 'To Do',
-            'cards': [{'id': '456', 'name': 'Test card'}]
-        }]
-    return StubResponse(fake_response_data)
-    raise Exception(f'Integration test did not expect URL "{url}"')
