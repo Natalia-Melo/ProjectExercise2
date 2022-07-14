@@ -9,20 +9,34 @@
   <div class="row">
     <div class="col-md-12">
       <h2>Items</h2>
-      <ul class="list-group mb-4">
-        {% for item in items %}
-        <li> {{item.title}} </li>
+        {% for list in lists %}
+        <h3>{{list.name}}</h3>
+            <ul class="list-group mb-4">
+            {% for item in items if item.idList == list.idList %}
+            <li> {{item.name}}
+            {% if list.name != 'Done' %}
+                <a class ="button" href="{{url_for('complete_item',id = item.id)}}">Mark item as completed</a>
+            {% endif %}
+            </li>
+                <body>
+                <p> <b> Description of task </b> </p>
+                <p>{{item.desc}}</p>
+                </body>
+            {% endfor %}
+            </ul>
         {% endfor %}
-      </ul>
     </div>
   </div>
+
 <form action="{{url_for('add_new_item')}}" method="post" class="form-add-item">
   <div class="form-add-item">
-    <label for="name">Name of new item:  </label>
+    <label for="name">Add new item to To-Do list:  </label>
     <input type="text" name="title" id="name" required>
   </div>
   <div class="form-add-item">
-    <button type="submit"> Add new item </button>
+    <button type="submit"> Add </button>
   </div>
 </form>
 {% endblock %}
+
+
