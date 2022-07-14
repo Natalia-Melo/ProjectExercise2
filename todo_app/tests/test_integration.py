@@ -23,7 +23,7 @@ def test_index_page(monkeypatch, client):
     response = client.get('/')
     print(response)
     assert response.status_code == 200
-    assert 'Test card' in response.data.decode()
+    assert 'Test Card' in response.data.decode()
 
 def stub(url, params={}):
     fake_response_data = []
