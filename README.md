@@ -57,4 +57,5 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 ## Accesing Trello Board
 Ensure that the board id, key and token parameters are uploaded to a .env file to ensure connection with the trello board
 
-
+## Running Unit Tests
+To run the unit tests simply input $ pytest in the terminal.

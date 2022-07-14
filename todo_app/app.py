@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for
 
 from todo_app.data.trello_items import fetch_all_cards, create_new_card, mark_as_complete, define_lists_in_board
 from todo_app.flask_config import Config
+from todo_app.data.view_model import Item
+from todo_app.data.view_model2 import ViewModel
 
 app = Flask(__name__)
 app.config.from_object(Config())
@@ -22,11 +24,4 @@ def add_new_item():
 def complete_item(id):
     mark_as_complete(id)
     return redirect(url_for('index'))
-
-class Item:
-    def __init__(self, id, name,idList,desc):
-        self.id = id
-        self.name = name
-        self.idList = idList
-        self.desc = desc
 
