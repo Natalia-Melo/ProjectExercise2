@@ -4,6 +4,9 @@ from todo_app import app
 import requests
 import os
 
+test_board_id = os.environ.get('BOARD_ID')
+lists_trial = ['6564f','45849']
+
 @pytest.fixture
 def client():
      # Use our test integration config instead of the 'real' version
@@ -18,12 +21,15 @@ def client():
 def test_index_page(monkeypatch, client):
     monkeypatch.setattr(requests, 'get', stub)
     response = client.get('/')
+    print(response)
+    assert response.status_code == 200
+    assert 'Test card' in response.data.decode()
 
 def stub(url, params={}):
-    test_board_id = os.environ.get('BOARD_ID')
+    fake_response_data = []
     if url == f'https://api.trello.com/1/boards/{test_board_id}/lists/open':
         fake_response_data = [{
-            'id': '123def',
+            'id': '123abc',
             'name': 'Test Card',
             'idList': '6564f',
             'desc': 'Test Description'
@@ -37,12 +43,11 @@ def stub(url, params={}):
         }]
     elif url == f"https://api.trello.com/1/cards":
         fake_response_data = [{
-            'id': '123def',
+            'id': '123ghi',
             'name': 'Test Card',
             'idList': '6564f',
             'desc': 'Test Description'
         }]
-
     return StubResponse(fake_response_data)
     raise Exception(f'Integration test did not expect URL "{url}"')
 

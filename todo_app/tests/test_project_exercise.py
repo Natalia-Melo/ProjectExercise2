@@ -1,19 +1,20 @@
+from todo_app.data.view_model import Item
 from todo_app.data.view_model2 import ViewModel
+
 initialise_list = [
-    {'name': 'Example 1', 'status':'Doing'},
-    {'name': 'Example 2', 'status':'Doing'},
-    {'name': 'Example 3', 'status':'Done'},
-    {'name': 'Example 4', 'status': 'To-Do'}
+    Item(1,'Example 1','123','Desc','To-Do').items,
+    Item(2,'Example 2','123','Desc','To-Do').items,
+    Item(3,'Example 3','456','Desc','Doing').items,
+    Item(4,'Example 4','789','Desc','Done').items
 ]
 
+object = ViewModel(initialise_list)
+
 def test_doing():
-    item = ViewModel(initialise_list)
-    assert item.doing_items == ['Example 1', 'Example 2']
+    assert object.to_do_items == ['Example 1', 'Example 2']
 
 def test_to_do():
-    item = ViewModel(initialise_list)
-    assert item.to_do_items == ['Example 4']
+    assert object.doing_items == ['Example 3']
 
 def test_done():
-    item = ViewModel(initialise_list)
-    assert item.done_items == ['Example 3']
+    assert object.done_items == ['Example 4']
