@@ -20,7 +20,6 @@ def test_index_page(monkeypatch, client):
     response = client.get('/')
 
 def stub(url, params={}):
-    print(url)
     test_board_id = os.environ.get('BOARD_ID')
     if url == f'https://api.trello.com/1/boards/{test_board_id}/lists/open':
         fake_response_data = [{
@@ -29,7 +28,6 @@ def stub(url, params={}):
             'idList': '6564f',
             'desc': 'Test Description'
         }]
-
     elif url == f"https://api.trello.com/1/boards/{test_board_id}/cards/open":
         fake_response_data = [{
             'id': '123def',
@@ -37,16 +35,7 @@ def stub(url, params={}):
             'idList': '6564f',
             'desc': 'Test Description'
         }]
-
     elif url == f"https://api.trello.com/1/cards":
-        fake_response_data = [{
-            'id': '123def',
-            'name': 'Test Card',
-            'idList': '6564f',
-            'desc': 'Test Description'
-        }]
-
-    else:
         fake_response_data = [{
             'id': '123def',
             'name': 'Test Card',
