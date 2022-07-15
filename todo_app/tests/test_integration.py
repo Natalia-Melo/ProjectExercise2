@@ -5,7 +5,6 @@ import requests
 import os
 
 test_board_id = os.environ.get('BOARD_ID')
-lists_trial = ['6564f','45849']
 
 @pytest.fixture
 def client():
