@@ -57,5 +57,13 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 ## Accesing Trello Board
 Ensure that the board id, key and token parameters are uploaded to a .env file to ensure connection with the trello board
 
-## Running Unit Tests
-To run the unit tests simply input $ pytest in the terminal.
+## Running Tests
+To run all the tests (unit and integration) simply input into the terminal:
+```bash
+$ pytest
+```
+The tests are located in /todo_app/tests. Unit tests are located in test_unit.py and integration tests 
+in test_integration.py. To run a specific file, run from the tests directory:
+```bash
+$ pytest <Name of file>
+```

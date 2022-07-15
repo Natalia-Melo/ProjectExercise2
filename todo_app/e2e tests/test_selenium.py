@@ -1,9 +1,10 @@
 import os
+import pytest
 from time import sleep
 from threading import Thread
 from todo_app import app
 from todo_app.data.trello_items import create_new_board, delete_board
-import pytest
+from selenium.exe import webdriver
 
 @pytest.fixture(scope='module')
 def app_with_temp_board():
@@ -22,3 +23,8 @@ def app_with_temp_board():
     # Tear Down
     thread.join(1)
     delete_board(board_id)
+
+@pytest.fixture(scope="module")
+def driver():
+    with webdriver.Firefox() as driver:
+        yield driver
