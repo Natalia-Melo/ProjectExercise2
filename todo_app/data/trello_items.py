@@ -1,8 +1,6 @@
 import requests
 import os
 
-Board_ID = os.environ.get('BOARD_ID')
-
 def build_url(endpoint):
     return f"https://api.trello.com/1/{endpoint}"
 
@@ -33,6 +31,7 @@ def mark_as_complete(card_id):
     requests.put(url, params=query, headers=headers)
 
 def fetch_all_cards():
+    Board_ID = os.environ.get('BOARD_ID')
     url = build_url(f"boards/{Board_ID}/cards/open")
     query = get_auth_params()
     r = requests.get(url, params=query)
@@ -40,6 +39,7 @@ def fetch_all_cards():
     return r_json
 
 def define_lists_in_board():
+    Board_ID = os.environ.get('BOARD_ID')
     url = build_url(f"boards/{Board_ID}/lists/open")
     query = get_auth_params()
     r = requests.get(url, params=query)

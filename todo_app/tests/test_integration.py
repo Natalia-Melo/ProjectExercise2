@@ -4,7 +4,6 @@ from todo_app import app
 import requests
 import os
 
-test_board_id = os.environ.get('BOARD_ID')
 
 @pytest.fixture
 def client():
@@ -24,6 +23,7 @@ def test_index_page(monkeypatch, client):
     assert 'Test Card' in response.data.decode()
 
 def stub(url, params={}):
+    test_board_id = os.environ.get('BOARD_ID')
     fake_response_data = []
     if url == f'https://api.trello.com/1/boards/{test_board_id}/lists/open':
         fake_response_data = [{
