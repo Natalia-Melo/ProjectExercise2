@@ -20,7 +20,6 @@ def client():
 def test_index_page(monkeypatch, client):
     monkeypatch.setattr(requests, 'get', stub)
     response = client.get('/')
-    print(response)
     assert response.status_code == 200
     assert 'Test Card' in response.data.decode()
 
@@ -28,21 +27,12 @@ def stub(url, params={}):
     fake_response_data = []
     if url == f'https://api.trello.com/1/boards/{test_board_id}/lists/open':
         fake_response_data = [{
-            'id': '123abc',
-            'name': 'Test Card',
-            'idList': '6564f',
-            'desc': 'Test Description'
+            'id': '6564f',
+            'name':'Done'
         }]
     elif url == f"https://api.trello.com/1/boards/{test_board_id}/cards/open":
         fake_response_data = [{
             'id': '123def',
-            'name': 'Test Card',
-            'idList': '6564f',
-            'desc': 'Test Description'
-        }]
-    elif url == f"https://api.trello.com/1/cards":
-        fake_response_data = [{
-            'id': '123ghi',
             'name': 'Test Card',
             'idList': '6564f',
             'desc': 'Test Description'
