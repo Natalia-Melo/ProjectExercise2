@@ -19,13 +19,11 @@ def test_index_page(monkeypatch, client):
     assert response.status_code == 200
     assert 'Test Card' in response.data.decode()
 
-
 def test_create_new_page(monkeypatch, client):
     monkeypatch.setattr(requests,'get', stub)
     monkeypatch.setattr(requests,'post', new_stub)
     response = client.post('/add_new_item')
-    assert response.status_code == 302 # After post requet, page sendds you back to the main page
-
+    assert response.status_code == 302 # After post requet, page sends you back to the main page
 
 def stub(url, params={}):
     test_board_id = os.environ.get('BOARD_ID')

@@ -46,3 +46,14 @@ def define_lists_in_board():
     r_json = r.json()
     return [{'idList':item['id'], 'name':item['name']} for item in r_json]
 
+
+def delete_board(board_id_delete):
+    url = build_url(f"boards/{board_id_delete}")
+    query = get_auth_params()
+    requests.delete(url,params=query)
+
+
+def create_new_board(name_new_board):
+    url = build_url(f"boards/")
+    query = get_auth_params({'name':name_new_board})
+    requests.post(url, params=query)
