@@ -1,12 +1,20 @@
-class Item:
-    def __init__(self, id, name,idList,desc,listName = ''):
-        self.id = id
-        self.name = name
-        self.idList = idList
-        self.desc = desc
-        self.status = listName
-        self._items = [self.id, self.name, self.idList,self.desc,self.status]
+class ViewModel:
+    def __init__(self,items):
+        self._items = items
 
     @property
     def items(self):
         return self._items
+
+    @property
+    def doing_items(self):
+        return [item[1] for item in self.items if item[4]=='Doing']
+
+    @property
+    def to_do_items(self):
+        return [item[1] for item in self.items if item[4]=='To-Do']
+
+    @property
+    def done_items(self):
+        return [item[1] for item in self.items if item[4]=='Done']
+

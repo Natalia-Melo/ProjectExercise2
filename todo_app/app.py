@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 
 from todo_app.data.trello_items import fetch_all_cards, create_new_card, mark_as_complete, define_lists_in_board
 from todo_app.flask_config import Config
-from todo_app.data.view_model import Item
+from todo_app.data.Item import Item
 
 def create_app():
     app = Flask(__name__)

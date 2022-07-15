@@ -1,5 +1,5 @@
-from todo_app.data.view_model import Item
-from todo_app.data.view_model2 import ViewModel
+from todo_app.data.Item import Item
+from todo_app.data.view_model import ViewModel
 
 initialise_list = [
     Item(1,'Example 1','123','Desc','To-Do').items,
