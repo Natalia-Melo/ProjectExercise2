@@ -19,6 +19,7 @@ def client():
 def test_index_page(monkeypatch, client):
     monkeypatch.setattr(requests, 'get', stub)
     response = client.get('/')
+    r = response.data.decode()
     assert response.status_code == 200
     assert 'Test Card' in response.data.decode()
 
