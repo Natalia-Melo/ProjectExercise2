@@ -8,20 +8,24 @@ import os
 @pytest.fixture
 def client():
      # Use our test integration config instead of the 'real' version
-    file_path = find_dotenv('.env.test')
     load_dotenv(file_path, override=True)
-    # Create the new app.
     test_app = app.create_app()
-    #  Use the app to create a test_client that can be used in our tests.
     with test_app.test_client() as client:
          yield client
 
 def test_index_page(monkeypatch, client):
     monkeypatch.setattr(requests, 'get', stub)
     response = client.get('/')
-    r = response.data.decode()
     assert response.status_code == 200
     assert 'Test Card' in response.data.decode()
+
+
+def test_create_new_page(monkeypatch, client):
+    monkeypatch.setattr(requests,'get', stub)
+    monkeypatch.setattr(requests,'post', new_stub)
+    response = client.post('/add_new_item')
+    assert response.status_code == 302 # After post requet, page sendds you back to the main page
+
 
 def stub(url, params={}):
     test_board_id = os.environ.get('BOARD_ID')
@@ -38,6 +42,17 @@ def stub(url, params={}):
             'idList': '6564f',
             'desc': 'Test Description'
         }]
+    return StubResponse(fake_response_data)
+    raise Exception(f'Integration test did not expect URL "{url}"')
+
+def new_stub(url, params={}, headers={}):
+    fake_response_data = []
+    if url == f"https://api.trello.com/1/cards":
+        fake_response_data = [{
+            'name': 'Test Card2',
+            'idList': '6564f',
+        }]
+
     return StubResponse(fake_response_data)
     raise Exception(f'Integration test did not expect URL "{url}"')
 
